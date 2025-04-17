@@ -54,6 +54,7 @@ public class ProjectSecurityConfig {
 //                .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure()) // Only HTTP
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/security/v1/auth/login").permitAll()
+                        .requestMatchers("/api/security/v1/auth/refresh").permitAll()
                         .requestMatchers("/api/security/v1/auth/verify-session").permitAll()
                         .requestMatchers("/api/security/v1/auth/logout").permitAll()
                         .requestMatchers("/api/security/**").authenticated()
