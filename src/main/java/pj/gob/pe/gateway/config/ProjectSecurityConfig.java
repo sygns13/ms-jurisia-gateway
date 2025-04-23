@@ -26,8 +26,8 @@ public class ProjectSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); // Origen permitido
-        config.setAllowedMethods(Collections.singletonList("*")); // Métodos permitidos
+        config.addAllowedOriginPattern("*"); // <--- permite cualquier origen
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowCredentials(true); // Permitir credenciales
         config.setAllowedHeaders(Collections.singletonList("*")); // Cabeceras permitidas
         config.setExposedHeaders(Arrays.asList("Authorization")); // Cabeceras expuestas
