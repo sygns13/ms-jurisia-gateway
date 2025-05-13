@@ -59,6 +59,7 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/api/security/v1/auth/logout").permitAll()
                         .requestMatchers("/api/security/**").authenticated()
                         .requestMatchers("/api/consultaia/**").authenticated()
+                        .requestMatchers("/api/expedientes/**").authenticated()
                         .requestMatchers("/v1/test/*").authenticated());
         http.oauth2ResourceServer(rsc -> rsc.jwt(jwtConfigurer ->
                 jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter)));
