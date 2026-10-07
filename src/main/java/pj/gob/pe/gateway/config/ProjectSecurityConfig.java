@@ -27,10 +27,14 @@ public class ProjectSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOriginPattern("*"); // <--- permite cualquier origen
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // PATCH: activación/desactivación de los mantenimientos (/activation/{id}/{valor})
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowCredentials(true); // Permitir credenciales
         config.setAllowedHeaders(Collections.singletonList("*")); // Cabeceras permitidas
-        config.setExposedHeaders(Arrays.asList("Authorization")); // Cabeceras expuestas
+        // Content-Disposition: nombre del archivo en las descargas (.docx).
+        // X-*: estado de la generación de documentos por plantilla (ms-jurisia-judicial).
+        config.setExposedHeaders(Arrays.asList("Authorization", "Content-Disposition",
+                "X-Estado-IA", "X-Variables-Sin-Valor", "X-Session-UID")); // Cabeceras expuestas
         config.setMaxAge(3600L); // Tiempo máximo de caché para CORS
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // Aplicar a todas las rutas
